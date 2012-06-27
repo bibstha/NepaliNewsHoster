@@ -1,10 +1,11 @@
 from django.db import models
+from django.conf import settings
 import os
 
 # Create your models here.
 class FileIndex():
 	# make sure to put a / at the end
-	FOLDER_ROOT = '/home/bibek/src/htdocs/personal/nepalinewspdfgenerator/files/combined/'
+	FOLDER_ROOT = settings.STATICFILES_DIRS[0]
 	def getList(self, path):
 		#TODO check path for security
 
