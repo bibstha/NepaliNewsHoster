@@ -1,10 +1,13 @@
+import os
 # Django settings for nepalipatrika project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 # MAIN ROOT OF THE APPLICATION
-APP_ROOT = '/home/bibek/src/htdocs/nepalipatrika'
+#APP_ROOT = '/home/bibek/src/htdocs/nepalipatrika'
+APP_ROOT = os.path.realpath('.') 
+print APP_ROOT
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
