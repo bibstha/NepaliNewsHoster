@@ -1,0 +1,32 @@
+{% comment %}
+Available Variables
+* list
+* relPath
+* baseName (for instance patrika)
+{% endcomment %}
+<style>
+.dir {
+	
+}
+.file {
+
+}
+</style>
+<h1>Nepali Patrika Archive</h1>
+<ul>
+	{% if relPath != "." %}
+		<li class="dir"><a href="..">../</a></li>
+	{% endif %}
+
+	{% for listType, listValues in list.iteritems %}
+		{% if listType == "dirList" %}
+			{% for name in listValues %}
+				<li class="dir"><a href="./{{ name }}/">{{ name }}/</a></li>
+			{% endfor %}
+		{% elif listType == "fileList" %}
+			{% for name in listValues %}
+				<li class="file"><a href="/static/{{relPath}}/{{ name }}">{{ name }}</a></li>
+			{% endfor %}
+		{% endif %}
+	{% endfor %}
+</ul>
