@@ -21,7 +21,7 @@ class FileIndex():
 			else:
 				fileList.append(file)
 		dirList.sort()
-		fileList.sort()
+		fileList.sort(reverse=True)
 		return {'dirList':dirList, 'fileList':fileList}
 
 	def getRelativePath(self, path):

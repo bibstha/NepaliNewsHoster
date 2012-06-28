@@ -11,6 +11,7 @@ Available Variables
 <head>
 <title>Nepali Patrika</title>
 <style>
+body { font-family: "helvetica neue", helvetica, arial, sans-serif; font-size: 13px; }
 .dir {
 	list-style: square url({{ MEDIA_URL }}folder_icon.png);
 }
@@ -21,6 +22,7 @@ Available Variables
 </head>
 <body>
 <h1>Nepali Patrika Archive</h1>
+<span>Index of "/patrika/{{ relPath }}"</span>
 <ul>
 	{% if relPath != "." %}
 		<li class="dir"><a href="..">../</a></li>
