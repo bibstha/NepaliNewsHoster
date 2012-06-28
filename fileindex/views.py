@@ -1,7 +1,8 @@
-from django.template import RequestContext
+from django.template import RequestContext, loader, Context
 from django.shortcuts import render_to_response
 from fileindex.models import FileIndex
-from django.http import Http404
+from django.http import Http404, HttpResponseServerError
+import sys
 
 def index(request, baseName):
 	fi = FileIndex()
@@ -20,3 +21,10 @@ def list(request, baseName, urlRelativePath = "/"):
 	list = fi.getList(relativePath)
 	return render_to_response('fileindex/index.html', {'list': list, 'relPath': relativePath, 'baseName':baseName},
 		context_instance = RequestContext(request))
+
+def custom_500(request):
+    t = loader.get_template('500.html')
+    type, value, tb = sys.exc_info()
+    return HttpResponseServerError(t.render(Context(
+		{'exception_value': value, }
+	)))

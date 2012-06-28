@@ -6,10 +6,10 @@ from django.conf import settings
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = staticfiles_urlpatterns()
-urlpatterns += patterns('', 
-    (r'^patrika/media/(?P<path>.*)$', 'django.views.static.serve', {
-    'document_root': settings.MEDIA_ROOT}))
+urlpatterns = patterns('', 
+    (r'^patrika/static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATICFILES_DIRS[0]}),
+    (r'^patrika/media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT})
+)
 urlpatterns += patterns('',
 	url(r'^patrika/$', 'fileindex.views.index', {'baseName':'patrika'}, name='home'),
 	url(r'^patrika//$', 'fileindex.views.list', {'baseName':'patrika'}, name='home'),
@@ -25,3 +25,5 @@ urlpatterns += patterns('',
     # url(r'^admin/', include(admin.site.urls)),
 )
 
+#handler500 = 'fileindex.views.custom_500'
+#print urlpatterns
