@@ -1,13 +1,12 @@
 import os
 # Django settings for nepalipatrika project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 # MAIN ROOT OF THE APPLICATION
 #APP_ROOT = '/home/bibek/src/htdocs/nepalipatrika'
 APP_ROOT = os.path.realpath('.') 
-print APP_ROOT
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -69,7 +68,7 @@ STATIC_ROOT = APP_ROOT + '/static_root'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = '/patrika/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
