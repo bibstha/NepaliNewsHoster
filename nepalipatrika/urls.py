@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     (r'^patrika/media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT})
 )
 urlpatterns += patterns('',
+    url(r'^$', 'cms.views.index', name='home'),
 	url(r'^patrika/$', 'fileindex.views.index', {'baseName':'patrika'}, name='home'),
 	url(r'^patrika//$', 'fileindex.views.list', {'baseName':'patrika'}, name='home'),
 	url(r'^patrika/(?P<urlRelativePath>.*)/$', 'fileindex.views.list', {'baseName':'patrika'}, name='list'),
