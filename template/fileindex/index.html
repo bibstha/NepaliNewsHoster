@@ -55,7 +55,7 @@ Available Variables
         {% cycle rowClass %}
         <tr class="file{{ rowClass }}">
         	<td class="file_icon"></td>
-        	<td class="file_name"><a href="{% static '' %}{{ relPath }}/{{ name.0 }}">{{ name.0 }}</a></td>
+        	<td class="file_name"><a href="{% static '' %}{{ relPath }}/{{ name.0 }}" target="_blank">{{ name.0 }}</a></td>
         	<td class="file_size">{{ name.1 }}</td>
         	<!--<td class="file_download">
         	  <a href="">Report Issue</a>
