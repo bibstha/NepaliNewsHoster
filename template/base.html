@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+___.   .__                  __   .__                   /\                 /\ 
+\_ |__ |  |__ _____ _______|  | _|  |__ _____ _______  \ \    _____      / / 
+ | __ \|  |  \\__  \\_  __ \  |/ /  |  \\__  \\_  __ \  \ \  /     \    / /  
+ | \_\ \   Y  \/ __ \|  | \/    <|   Y  \/ __ \|  | \/   \ \|  Y Y  \  / /   
+ |___  /___|  (____  /__|  |__|_ \___|  (____  /__|       \ \__|_|  / / /    
+     \/     \/     \/           \/    \/     \/            \/     \/  \/     
+-->
+<head>
+  <link rel="stylesheet" href="style.css" />
+  <title>Bharkhar.com{% block title %}{% endblock %}</title>
+  <link href="{{ MEDIA_URL }}style.css"  rel="stylesheet" type="text/css">
+
+  <!-- GoogleAnalytics -->
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33001355-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
+  <!-- End GoogleAnalytics -->
+
+</head>
+<body>
+    <h1 id="title">{% block page_header %}{% endblock %}</h1>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <div id="sidebar">
+        {% block sidebar %}
+        {% comment %}
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog/">Blog</a></li>
+        </ul>
+        {% endcomment %}
+        {% endblock %}
+    </div>
+</body>
+</html>

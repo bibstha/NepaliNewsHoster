@@ -16,10 +16,11 @@ class FileIndex():
 		dirList = []
 		fileList = []
 		for file in os.listdir(folder):
-			if (os.path.isdir(os.path.join(folder, file))):
-				dirList.append(file)
+			fullPath = os.path.join(folder, file)
+			if (os.path.isdir(fullPath)):
+				dirList.append((file, 0))
 			else:
-				fileList.append(file)
+				fileList.append((file, self.sizeof_fmt(os.path.getsize(fullPath))))
 		dirList.sort()
 		fileList.sort(reverse=True)
 		return {'dirList':dirList, 'fileList':fileList}
@@ -31,3 +32,9 @@ class FileIndex():
 		# Resolve complicated relative path to a simple one
 		return os.path.relpath(os.path.join(self.FOLDER_ROOT, path), self.FOLDER_ROOT)
 
+	def sizeof_fmt(self, num):
+		for x in ['bytes','KB','MB','GB']:
+			if num < 1024.0:
+				return "%3.1f %s" % (num, x)
+			num /= 1024.0
+		return "%3.1f %s" % (num, 'TB')
