@@ -31,10 +31,12 @@ Available Variables
     <h2>Today's Papers</h2>
   </div>
   <div class="row">
-    <div class="span4">
+    <div class="span12">
+      <ul>
       {% for dir, latestFile in latestFileList.iteritems %}
-        <a href="{% static '' %}{{ dir }}/{{ latestFile.0 }}" target="_blank">{{ dir }}/{{ latestFile.0 }}</a>
+        <li><a href="{% static '' %}{{ dir }}/{{ latestFile.0 }}" target="_blank">{{ dir }}/{{ latestFile.0 }}</a></li>
       {% endfor %}
+      </ul>
     </div>
   </div>
 </section>
