@@ -1,32 +1,14 @@
+{% extends 'base.html' %}
+
 {% comment %}
 Available Variables
 * non for now
 {% endcomment %}
-{% load staticfiles %}
-<!DOCTYPE html>
-<html>
 
-<head>
-<title>Bharkhar matrai pakeko!</title>
-<style>
-body { font-family: "helvetica neue", helvetica, arial, sans-serif; font-size: 13px; }
-</style>
-<!-- GoogleAnalytics -->
-<script type="text/javascript">
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-33001355-1']);
-_gaq.push(['_trackPageview']);
+{% block title %}{% endblock %}
+{% block page_header %}Bharkhar.com{% endblock %}
 
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-</script>
-<!-- End GoogleAnalytics -->
-</head>
-<body>
-<h1>Bharkhar matrai pakeko! Ekdam Taja!</h1>
+{% block content %}
+<h2>Bharkhar matrai pakeko! Ekdam Taja!</h2>
 <p>Go to <a href="/patrika">Patrika</a></p>
-</body>
-</html>
+{% endblock %}
