@@ -1,0 +1,20 @@
+.file-list-col-icon {
+  width: 20px;
+}
+
+.dir_icon, .file_icon {
+  width: 17px;
+  padding-right: 2px;
+  padding-left: 10px;
+  background-position: 8px 5px;
+  background-repeat: no-repeat;
+}
+
+.dir_icon {
+  background-image: url(/patrika/media/fileindex/folder_icon.png);
+}
+
+.file_icon {
+  background-image: url(/patrika/media/fileindex/pdf_icon.png);
+}
+

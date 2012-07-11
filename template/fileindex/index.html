@@ -31,12 +31,16 @@ Available Variables
     <h2>Today's Papers</h2>
   </div>
   <div class="row">
-    <div class="span12">
-      <ul>
-      {% for dir, latestFile in latestFileList.iteritems %}
-        <li><a href="{% static '' %}{{ dir }}/{{ latestFile.0 }}" target="_blank">{{ dir }}/{{ latestFile.0 }}</a></li>
-      {% endfor %}
-      </ul>
+    <div class="span8">
+      <table class="table table-bordered table-striped">
+        {% for dir, latestFile in latestFileList.iteritems %}
+          <tr>
+            <td class="file_icon file-list-col-icon"></td>
+            <td><a href="{% static '' %}{{ dir }}/{{ latestFile.0 }}" target="_blank">{{ dir }}/{{ latestFile.0 }}</a></td>
+            <td>{{ latestFile.1 }}</td>
+          </tr>
+        {% endfor %}
+      </table>
     </div>
   </div>
 </section>
@@ -47,10 +51,10 @@ Available Variables
   <div class="page-header">
     <h2>Index of "/patrika/{{ relPath }}"</h2>
   </div>
-  <table class="file_list table table-bordered table-striped">
+  <table class="table table-bordered table-striped">
   	<thead>
   		<tr>
-        <th></th><th>Name</th><th>Size</th>
+        <th class="file-list-col-icon"></th><th>Name</th><th>Size</th>
       </tr>
     </thead>
     <tbody>
