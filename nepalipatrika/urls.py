@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic.simple import direct_to_template
 from django.conf import settings
+
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -15,6 +17,7 @@ urlpatterns += patterns('',
 	url(r'^patrika/$', 'fileindex.views.index', {'baseName':'patrika'}, name='home'),
 	url(r'^patrika//$', 'fileindex.views.list', {'baseName':'patrika'}, name='home'),
 	url(r'^patrika/(?P<urlRelativePath>.*)/$', 'fileindex.views.list', {'baseName':'patrika'}, name='list'),
+    url(r'^robots\.txt$', direct_to_template, {'template': 'robots.txt', 'mimetype': 'text/plain'}),
     # Examples:
     # url(r'^$', 'nepalipatrika.views.home', name='home'),
     # url(r'^nepalipatrika/', include('nepalipatrika.foo.urls')),
