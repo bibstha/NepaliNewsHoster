@@ -11,7 +11,7 @@ ___.   .__                  __   .__                   /\                 /\
 <head>
   <link rel="stylesheet" href="style.css" />
   <title>Bharkhar.com{% block title %}{% endblock %}</title>
-  <link href="{{ MEDIA_URL }}style.css"  rel="stylesheet" type="text/css">
+  <link href="{{ MEDIA_URL }}css/bootstrap.min.css"  rel="stylesheet" type="text/css">
 
   <!-- GoogleAnalytics -->
   <script type="text/javascript">
@@ -29,7 +29,10 @@ ___.   .__                  __   .__                   /\                 /\
 
 </head>
 <body>
-    <h1 id="title">{% block page_header %}{% endblock %}</h1>
+  <div class="container">
+    <div class="page-header">
+      <h1 id="title">{% block page_header %}{% endblock %}</h1>
+    </div>
     <div id="content">
         {% block content %}{% endblock %}
     </div>
@@ -43,5 +46,11 @@ ___.   .__                  __   .__                   /\                 /\
         {% endcomment %}
         {% endblock %}
     </div>
+  </div> <!-- end of div.container -->
+
+  <!-- Le javascript
+  ================================================== -->      
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src={{MEDIA_URL}}js/bootstrap.min.js></script>
 </body>
 </html>

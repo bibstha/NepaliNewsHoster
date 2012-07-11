@@ -9,7 +9,7 @@ class FileIndex():
 	def getList(self, path):
 		#TODO check path for security
 
-		# Security Checks
+		# Security Checks : currently done in views.py
 		#if path[0:2] != "./":
 		#	path = "./".join(path)
 		folder = os.path.join(self.FOLDER_ROOT, path)
@@ -38,3 +38,18 @@ class FileIndex():
 				return "%3.1f %s" % (num, x)
 			num /= 1024.0
 		return "%3.1f %s" % (num, 'TB')
+
+class PatrikaService():
+	def getLatest(self):
+		# Get the top most folder
+		# Get the first file inside each top folder order by name desc
+		fi = FileIndex()
+		rootDirList = fi.getList('.')['dirList']
+
+		latestFileList = {}
+		for x in rootDirList:
+			topFile = fi.getList(x[0])['fileList'][0]
+			latestFileList[ x[0] ] = topFile
+		print latestFileList
+		return latestFileList
+

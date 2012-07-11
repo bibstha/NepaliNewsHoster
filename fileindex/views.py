@@ -1,17 +1,20 @@
 from django.template import RequestContext, loader, Context
 from django.shortcuts import render_to_response
-from fileindex.models import FileIndex
+from fileindex.models import FileIndex, PatrikaService
 from django.http import Http404, HttpResponseServerError
 import sys
 
 def index(request, baseName):
 	fi = FileIndex()
 	list = fi.getList('.')
-	return render_to_response('fileindex/index.html', {'list': list, 'relPath': '.', 'baseName':baseName},
-		context_instance = RequestContext(request))
+	latestFileList = PatrikaService().getLatest()
+	return render_to_response('fileindex/index.html', {'list': list, 'relPath': '.', 'baseName':baseName,
+		'latestFileList':latestFileList}, context_instance = RequestContext(request))
 
 def list(request, baseName, urlRelativePath = "/"):
 	fi = FileIndex()
+	latestFileList = PatrikaService().getLatest()
+
 	relativePath = fi.getRelativePath(urlRelativePath)
 	
 	# security risk if relativePath begins with ..
@@ -19,8 +22,8 @@ def list(request, baseName, urlRelativePath = "/"):
 		raise Http404
 	
 	list = fi.getList(relativePath)
-	return render_to_response('fileindex/index.html', {'list': list, 'relPath': relativePath, 'baseName':baseName},
-		context_instance = RequestContext(request))
+	return render_to_response('fileindex/index.html', {'list': list, 'relPath': relativePath, 'baseName':baseName, 
+		'latestFileList':latestFileList}, context_instance = RequestContext(request))
 
 def custom_500(request):
     t = loader.get_template('500.html')

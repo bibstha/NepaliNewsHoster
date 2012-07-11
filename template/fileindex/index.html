@@ -5,7 +5,9 @@ Available Variables
 * list
 * relPath
 * baseName (for instance patrika)
+* latestFileList - the latest files available
 {% endcomment %}
+
 {% load staticfiles %}
 
 {% block title %}Nepali Patrika{% endblock %}
@@ -23,55 +25,76 @@ Available Variables
 }(document, 'script', 'facebook-jssdk'));</script>
 <!-- end of fb stuff -->
 
-<h2>Index of "/patrika/{{ relPath }}"</h2>
-<div class="bubble">
-<table class="file_list">
-	<thead>
-		<tr>
-      <th></th><th>Name</th><th>Size</th>
-    </tr>
-  </thead>
-  <tbody>
-
-  {% if relPath != "." %}
-  <tr>
-  	<td class="dir_icon"></td>
-    <td class="dir"><a href="..">../</a></td><td></td>
-  </tr>
-  {% endif %}
-
-  {% spaceless %}
-  {% for listType, listValues in list.iteritems %}
-    {% if listType == "dirList" %}
-      {% for name in listValues %}
-        {% cycle ' alt' '' as rowClass silent %}
-        <tr class="dir{{ rowClass }}">
-        	<td class="dir_icon"></td>
-        	<td><a href="./{{ name.0 }}/">{{ name.0 }}/</a></td></td><td></td>
-        </tr>
-      {% endfor %}
-    {% elif listType == "fileList" %}
-      {% for name in listValues %}
-        {% cycle rowClass %}
-        <tr class="file{{ rowClass }}">
-        	<td class="file_icon"></td>
-        	<td class="file_name"><a href="{% static '' %}{{ relPath }}/{{ name.0 }}" target="_blank">{{ name.0 }}</a></td>
-        	<td class="file_size">{{ name.1 }}</td>
-        	<!--<td class="file_download">
-        	  <a href="">Report Issue</a>
-        	</td>-->
-        </tr>
-      {% endfor %}
-    {% endif %}
-  {% endfor %}
-  {% endspaceless %}
-  
-  </tbody>
-  </table>
+<!-- Latest Papers -->
+<section id="todays-papers">
+  <div class="page-header">
+    <h2>Today's Papers</h2>
   </div>
-<hr/>
-<h2>Leave your comments</h2>
-<p>Comments, suggestions, improvement tips:</p>
-<div class="fb-comments" data-href="http://bharkhar.com/patrika/" data-num-posts="20" data-width="470"></div>
+  <div class="row">
+    <div class="span4">
+      {% for dir, latestFile in latestFileList.iteritems %}
+        <a href="{% static '' %}{{ dir }}/{{ latestFile.0 }}" target="_blank">{{ dir }}/{{ latestFile.0 }}</a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
 
+
+<!-- Index of Papers -->
+<section id="index-papers">
+  <div class="page-header">
+    <h2>Index of "/patrika/{{ relPath }}"</h2>
+  </div>
+  <table class="file_list table table-bordered table-striped">
+  	<thead>
+  		<tr>
+        <th></th><th>Name</th><th>Size</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    {% if relPath != "." %}
+    <tr>
+    	<td class="dir_icon"></td>
+      <td class="dir"><a href="..">../</a></td><td></td>
+    </tr>
+    {% endif %}
+
+    {% spaceless %}
+    {% for listType, listValues in list.iteritems %}
+      {% if listType == "dirList" %}
+        {% for name in listValues %}
+          {% cycle ' alt' '' as rowClass silent %}
+          <tr class="dir{{ rowClass }}">
+          	<td class="dir_icon"></td>
+          	<td><a href="./{{ name.0 }}/">{{ name.0 }}/</a></td></td><td></td>
+          </tr>
+        {% endfor %}
+      {% elif listType == "fileList" %}
+        {% for name in listValues %}
+          {% cycle rowClass %}
+          <tr class="file{{ rowClass }}">
+          	<td class="file_icon"></td>
+          	<td class="file_name"><a href="{% static '' %}{{ relPath }}/{{ name.0 }}" target="_blank">{{ name.0 }}</a></td>
+          	<td class="file_size">{{ name.1 }}</td>
+          	<!--<td class="file_download">
+          	  <a href="">Report Issue</a>
+          	</td>-->
+          </tr>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+    {% endspaceless %}
+    
+    </tbody>
+  </table>
+</section>
+
+<section id="comments">
+  <div class="page-header">
+    <h2>Leave your comments</h2>
+  </div>
+  <p>Comments, suggestions, improvement tips:</p>
+  <div class="fb-comments" data-href="http://bharkhar.com/patrika/" data-num-posts="20" data-width="470"></div>
+</section>
 {% endblock %}
