@@ -1,6 +1,7 @@
 # Create your views here.
 from osmusertracker import *
 from django.http import HttpResponse
+from django.shortcuts import render_to_response
 
 def api(request, username):
 	userFile = UserFile(username)
@@ -15,7 +16,7 @@ def api(request, username):
 		changesetFile.download()
 	userData = user.calculateUserData()
 
-	for days in userData:
+	for days in sorted(userData.keys()):
 		for key in userData[days].keys():
 			if key != 'createCount' and key != 'modifyCount':
 				del userData[days][key]
@@ -23,6 +24,5 @@ def api(request, username):
 	jsonOutput = json.dumps(userData, sort_keys=True, indent=4)
 	return HttpResponse(jsonOutput)
 	
-
-
-	
+def usertrackerHtml(request):
+	return render_to_response('osmusertracker/usertracker.html')
