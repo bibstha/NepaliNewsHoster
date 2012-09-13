@@ -116,7 +116,7 @@
     </script>
     <script type="text/javascript">
       // Event Handlers
-      host = 'http://localhost:8000';
+      host = 'http://bharkhar.com';
       $("form").submit(function() {
         if ( $("#field").val() != "") {
           $.getJSON(host + '/osmusertracker/api/0.1/' + $("#field").val() + "?callback=?", ajaxHandleJsonData)
