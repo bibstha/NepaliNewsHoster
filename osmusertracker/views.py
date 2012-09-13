@@ -30,7 +30,7 @@ def api_update(request, username):
 	user.loadChangeset()
 	user.updateChangeset()
 	user.saveChangeset()
-	return HttpResponse('Complete')
+	return HttpResponse('{"status":"Complete"}')
 	
 def usertrackerHtml(request):
 

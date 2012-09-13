@@ -128,7 +128,7 @@
 
       $('#updateBtn').click(function() {
         if ( $("#field").val() != "" ) {
-          $.get('/osmusertracker/api_update/0.1/' + $("#field").val(), ajaxHandleUpdate)
+          $.getJSON('/osmusertracker/api_update/0.1/' + $("#field").val(), ajaxHandleUpdate)
           .error(ajaxHandleUpdateFailure);
         } else {
           log("ERROR", "Username cannot be empty");
@@ -173,7 +173,7 @@
       }
 
       function ajaxHandleUpdate(data) {
-        if (data == "Complete") {
+        if (data.status == "Complete") {
           log("INFO", "Successfully Updated");
           $("form").submit();
         } 
