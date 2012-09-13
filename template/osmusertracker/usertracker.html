@@ -166,7 +166,6 @@
           chartDataModify.push([day].concat(modifyDataArray));
           tableData.push( [day].concat(createDataArray, modifyDataArray) );
         }
-        console.log(tableData);
         drawChart(chartDataCreate, 'chart_create_div', "User 'Created' statistics for " + $("#field").val());
         drawChart(chartDataModify, 'chart_modify_div', "User 'Modified' statistics for " + $("#field").val());
         drawTable(tableData, 'table_div', "User 'Created' statistics for " + $("#field").val());
