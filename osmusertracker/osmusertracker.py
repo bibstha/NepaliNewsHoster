@@ -73,7 +73,7 @@ class FileDownloader:
 
 class UserChangeFile(FileDownloader):
 	_fileName = None
-	_dataFolder = Config.ROOTPATH + "/userdata/changesets"
+	_dataFolder = settings.APP_ROOT + "/" + Config.ROOTPATH + "/userdata/changesets"
 	_urlTemplate = "http://api.openstreetmap.org/api/0.6/changeset/{0}/download"
 	_url = None
 
