@@ -116,9 +116,10 @@
     </script>
     <script type="text/javascript">
       // Event Handlers
+      host = 'http://localhost:8000';
       $("form").submit(function() {
         if ( $("#field").val() != "") {
-          $.getJSON('/osmusertracker/api/0.1/' + $("#field").val(), ajaxHandleJsonData)
+          $.getJSON(host + '/osmusertracker/api/0.1/' + $("#field").val() + "?callback=?", ajaxHandleJsonData)
           .error(ajaxJsonDataFailure);
         } else {
           log("ERROR", 'Username cannot be empty');
@@ -128,7 +129,7 @@
 
       $('#updateBtn').click(function() {
         if ( $("#field").val() != "" ) {
-          $.getJSON('/osmusertracker/api_update/0.1/' + $("#field").val(), ajaxHandleUpdate)
+          $.getJSON(host + '/osmusertracker/api_update/0.1/' + $("#field").val() + "?callback=?", ajaxHandleUpdate)
           .error(ajaxHandleUpdateFailure);
         } else {
           log("ERROR", "Username cannot be empty");

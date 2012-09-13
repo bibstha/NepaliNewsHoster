@@ -22,7 +22,11 @@ def api(request, username):
 				del userData[days][key]
 
 	jsonOutput = json.dumps(userData, sort_keys=True, indent=4)
-	return HttpResponse(jsonOutput)
+	print "Hello", request.GET.get('callback')
+	if request.GET.get('callback'):
+		callback = request.GET['callback']
+		jsonOutput = callback + "({0})".format(jsonOutput)
+	return HttpResponse(jsonOutput, mimetype="application/json")
 
 def api_update(request, username):
 	userFile = UserFile(username)
@@ -30,7 +34,11 @@ def api_update(request, username):
 	user.loadChangeset()
 	user.updateChangeset()
 	user.saveChangeset()
-	return HttpResponse('{"status":"Complete"}')
+	jsonOutput = '{"status":"Complete"}'
+	if request.GET.get('callback'):
+		callback = request.GET['callback']
+		jsonOutput = callback + "({0})".format(jsonOutput)
+	return HttpResponse(jsonOutput, mimetype="application/json")
 	
 def usertrackerHtml(request):
 
