@@ -3,6 +3,7 @@
 
 import requests, os, time, argparse, json
 from lxml import etree
+from django.conf import settings
 
 def log(logString, debug=False):
 	if (not debug) or Config.DEBUG:
@@ -22,7 +23,7 @@ class Config:
 
 class FileDownloader:
 	_isLoaded = False
-	_dataFolder = Config.ROOTPATH + "/userdata"
+	_dataFolder = settings.APP_ROOT + "/" + Config.ROOTPATH + "/userdata"
 	_fileName = None
 	_url = None
 	_data = None
