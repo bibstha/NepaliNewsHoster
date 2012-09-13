@@ -70,6 +70,9 @@
       <div><a target="_blank" href="http://www.adyota.org/map-kathmandu">Read More about our project MapKathmandu</a></div>
     </header>
     <hr/>
+    <div><span>Following are our team members of our Project. Click on the name of anyone to see their contribution.</span>
+      <div id="teamDiv"></div>
+    </div>
     <div id="log"></div>
     <div id="formContainer">
 	    <form id="userForm">
@@ -145,6 +148,7 @@
         if (getParameterByName('username') != '') {
           updateUser(getParameterByName('username'));
         }
+        updateTeamDiv();
       });
 
       // Ajax Handlers
@@ -203,6 +207,31 @@
       function updateUser(name) {
         $("#field").val(name);
         $("#userForm").submit()
+      }
+
+      function updateTeamDiv() {
+        var teamName = {
+          'Aashish Tripathee (Adyota)':'Aashish',
+          'amritkarma (adyota)':'Amrit',
+          'Arisha (Adyota)':'Arisha',
+          'bibstha':'Bibek',
+          'bimal(Adyota)':'Bimal',
+          'saese (adyota)':'Rajeev',
+          'prabhasp':'Prabhas',
+          'reeha (adyota)':'Reeha',
+          'RupeshG':'Rupesh',
+          'Lookforsakar (Adyota)':'Sakar',
+          '2121vijay(Adyota)':'Vijay'
+        };
+        for (username in teamName) {
+          name = teamName[username];
+          str = " <a href='#' uid='" + username + "'>" + name + "</a>";
+          $('#teamDiv').append(str);
+        }
+        $('#teamDiv a').click(function(e) {
+          updateUser($(this).attr('uid'));
+          e.preventDefault();
+        });
       }
     </script>
   </body>
