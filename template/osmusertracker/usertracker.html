@@ -65,6 +65,11 @@
   </style>	
   </head>
   <body>
+    <header>
+      <h1>Visualize user contribution in OpenStreetMap</h1>
+      <div><a target="_blank" href="http://www.adyota.org/map-kathmandu">Read More about our project MapKathmandu</a></div>
+    </header>
+    <hr/>
     <div id="log"></div>
     <div id="formContainer">
 	    <form id="userForm">
@@ -127,6 +132,21 @@
         }
       });
 
+      $('#loadingDiv')
+        .hide()  // hide it initially
+        .ajaxStart(function() {
+            $(this).show();
+        })
+        .ajaxStop(function() {
+            $(this).hide();
+      });
+
+      $(document).ready(function() {
+        if (getParameterByName('username') != '') {
+          updateUser(getParameterByName('username'));
+        }
+      });
+
       // Ajax Handlers
       function ajaxHandleJsonData(data) {
         log("INFO", "Data loaded for user");
@@ -169,14 +189,21 @@
         if (logType == "INFO") { $("#log").attr("class", "success"); }
       }
 
-      $('#loadingDiv')
-        .hide()  // hide it initially
-        .ajaxStart(function() {
-            $(this).show();
-        })
-        .ajaxStop(function() {
-            $(this).hide();
-      });
+      function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+        var regexS = "[\\?&]" + name + "=([^&#]*)";
+        var regex = new RegExp(regexS);
+        var results = regex.exec(window.location.search);
+        if(results == null)
+          return "";
+        else
+          return decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+
+      function updateUser(name) {
+        $("#field").val(name);
+        $("#userForm").submit()
+      }
     </script>
   </body>
 </html>
