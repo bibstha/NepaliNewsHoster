@@ -25,7 +25,7 @@
 }
  
 /* Syle the search button. Settings of line-height, font-size, text-indent used to hide submit value in IE */
-#submitInput {
+.btn {
     cursor:pointer; 
     width:70px; 
     height: 31px; 
@@ -38,7 +38,7 @@
     margin-left: 10px;
 }
 /* Style the search button hover state */
-#submitInput:hover {
+.btn:hover {
     background: center #357AE8; 
     border: 1px solid #2F5BB7;
 }
@@ -47,13 +47,30 @@
 #loadingDiv {height: 100%; width: 95%; position: absolute; top: 0; }
 #loadingDivInner {width: 90%; text-align: center; position: absolute; top: 40%}
 #chart_div { height: 640px;}
+.success, .error {
+    border: 1px solid;
+    margin: 10px 0px;
+    padding:15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+}
+.success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+}
+.error {
+    color: #D8000C;
+    background-color: #FFBABA;
+}
   </style>	
   </head>
   <body>
+    <div id="log"></div>
     <div id="formContainer">
 	    <form id="userForm">
 	        <input id="field" name="field" type="text" value=""/>
-	        <input id="submitInput" name="submitInput" type="submit" value="Load"/>
+	        <input id="submitInput" name="submitInput" type="submit" value="Load" class="btn"/>
+          <input id="updateBtn" name="update" type="button" value="Update" class="btn"/>
 	    </form>
 	  </div>
     <div id="chart_div">
@@ -80,21 +97,56 @@
       }
     </script>
     <script type="text/javascript">
+      // Event Handlers
       $("form").submit(function() {
         if ( $("#field").val() != "") {
-
-          $.getJSON('/osmusertracker/api/0.1/' + $("#field").val(), handleJSON);
+          $.getJSON('/osmusertracker/api/0.1/' + $("#field").val(), ajaxHandleJsonData)
+          .error(ajaxJsonDataFailure);
+        } else {
+          alert('Username cannot be empty');
         }
         return false;
       });
 
-      function handleJSON(data) {
+      $('#updateBtn').click(function() {
+        if ( $("#field").val() != "" ) {
+          $.get('/osmusertracker/api_update/0.1/' + $("#field").val(), ajaxHandleUpdate)
+          .error(ajaxHandleUpdateFailure);
+        } else {
+          alert("Username cannot be empty");
+        }
+      });
+
+      // Ajax Handlers
+      function ajaxHandleJsonData(data) {
+        log("INFO", "Data loaded for user");
         chartData = [['Day', 'Nodes', 'Ways', 'Relations']];
         for (day in data) {
           dayValue = data[day]['createCount'];
           chartData.push([day, dayValue['node'], dayValue['way'], dayValue['relation']]);
         }
         drawChart(chartData, $("#field").val(), 'chart_div');
+      }
+
+      function ajaxHandleUpdate(data) {
+        if (data == "Complete") {
+          log("INFO", "Successfully Updated");
+          $("form").submit();
+        } 
+      }
+
+      function ajaxJsonDataFailure() {
+        log("ERROR", "Cannot load data for user. Make sure the user exists.");
+      }
+
+      function ajaxHandleUpdateFailure() {
+        log("ERROR", "Cannot load data for user. Make sure the user exists.");
+      }
+
+      function log(logType, message) {
+        $("#log").text(message);
+        if (logType == "ERROR") { $("#log").attr("class", "error"); }
+        if (logType == "INFO") { $("#log").attr("class", "success"); }
       }
 
       $('#loadingDiv')
@@ -104,7 +156,7 @@
         })
         .ajaxStop(function() {
             $(this).hide();
-        });
+      });
     </script>
   </body>
 </html>
