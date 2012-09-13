@@ -21,7 +21,9 @@ urlpatterns += patterns('',
 
     # OSMUserTracker
     url(r'^osmusertracker/api/0.1/(?P<username>.*)$', 'osmusertracker.views.api'),
+    url(r'^osmusertracker/api_update/0.1/(?P<username>.*)$', 'osmusertracker.views.api_update'),
     url('^osmusertracker/demo/usertracker.html', 'osmusertracker.views.usertrackerHtml'),
+
     
     # Examples:
     # url(r'^$', 'nepalipatrika.views.home', name='home'),

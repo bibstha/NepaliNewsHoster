@@ -23,6 +23,15 @@ def api(request, username):
 
 	jsonOutput = json.dumps(userData, sort_keys=True, indent=4)
 	return HttpResponse(jsonOutput)
+
+def api_update(request, username):
+	userFile = UserFile(username)
+	user = User(userFile)
+	user.loadChangeset()
+	user.updateChangeset()
+	user.saveChangeset()
+	return HttpResponse('Complete')
 	
 def usertrackerHtml(request):
+
 	return render_to_response('osmusertracker/usertracker.html')
