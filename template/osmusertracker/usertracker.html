@@ -159,6 +159,8 @@
         chartDataCreate = [chartDataHeader];
         chartDataModify = [chartDataHeader];
         tableData = [['Day', 'Create Nodes', 'Create Ways', 'Create Relations', 'Modify Nodes', 'Modify Ways', 'Modify Relations']];
+        sumArray = []; arraySize = 6;
+        while(arraySize--) sumArray.push(0);
         for (day in data) {
           dayValue = data[day];
           createDataArray = [dayValue['createCount']['node'], dayValue['createCount']['way'], dayValue['createCount']['relation']];
@@ -166,7 +168,15 @@
           chartDataCreate.push([day].concat(createDataArray));
           chartDataModify.push([day].concat(modifyDataArray));
           tableData.push( [day].concat(createDataArray, modifyDataArray) );
+          sumArray[0] += dayValue['createCount']['node'];
+          sumArray[1] += dayValue['createCount']['way'];
+          sumArray[2] += dayValue['createCount']['relation'];
+          sumArray[3] += dayValue['modifyCount']['node'];
+          sumArray[4] += dayValue['modifyCount']['way'];
+          sumArray[5] += dayValue['modifyCount']['relation'];
         }
+        tableData.push( ['Sum'].concat(sumArray) );
+
         drawChart(chartDataCreate, 'chart_create_div', "User 'Created' statistics for " + $("#field").val());
         drawChart(chartDataModify, 'chart_modify_div', "User 'Modified' statistics for " + $("#field").val());
         drawTable(tableData, 'table_div', "User 'Created' statistics for " + $("#field").val());
