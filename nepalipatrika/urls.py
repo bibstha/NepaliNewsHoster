@@ -1,15 +1,16 @@
 from django.conf.urls import patterns, include, url
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+# from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views.generic.simple import direct_to_template
 from django.conf import settings
 
 
 # Uncomment the next two lines to enable the admin:
-from django.contrib import admin
-admin.autodiscover()
+# from django.contrib import admin
+# admin.autodiscover()
 
 urlpatterns = patterns('', 
-    (r'^patrika/static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATICFILES_DIRS[0]}),
+    # (r'^patrika/static/(?P<path>.*pdf)$', 'django.views.static.serve', {'document_root': settings.STATICFILES_DIRS[0]}),
+    # (r'^patrika/static/thumbnails/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATICFILES_DIRS[1]}),
     (r'^patrika/media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT})
 )
 urlpatterns += patterns('',

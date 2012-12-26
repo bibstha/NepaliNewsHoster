@@ -2,8 +2,12 @@
 
 {% comment %}
 Available Variables
-* non for now
+* dateFileMap - contains date wize sorted list
 {% endcomment %}
+
+{% load cms_utils %}
+{% load staticfiles %}
+
 
 {% block title %}Daily updated Nepali news{% endblock %}
 {% block page_header %}Bharkhar.com{% endblock %}
@@ -11,10 +15,24 @@ Available Variables
 {% block content %}
 <h2>Bharkhar matrai pakeko! Ekdam Taja!</h2>
 <p>Bharkhar.com hosts <strong>daily copies</strong> in PDF of major Nepali Newspapers.</p>
-<p>Go to <a href="/patrika">Patrika</a></p>
-<p>
-	For hackers: The codebase to generate the PDF is Free. If you want to generate PDF locally on your own, check out 
-	<a href="https://github.com/bibstha/NepaliNewsPdfGenerator" target="_blank">NepaliNewsPdfGenerator</a>. <br/>
-	Get in touch with me in <a href="http://twitter.com/bibstha" target="_blank">Twitter</a>.
-</p>
+<!-- <p>Go to <a href="/patrika">Patrika</a></p> -->
+<section id="todays-papers">
+  {% for fileDate, latestFileList in dateFileMap.iteritems %}
+    <h3>Papers for {{ fileDate }}</h3>
+      <div class="row">
+      {% for dir, latestFile in latestFileList.iteritems %}
+        <div class="span3">
+          <a href="{% static '' %}{{ dir }}/{{ latestFile.0 }}" target="_blank">
+            <img src="{% static '' %}{{ dir }}/{{ latestFile.0|thumbnail_url }}" />
+          </a>
+        </div>
+      {% endfor %}
+    </div>  
+  {% endfor %}
+</section>
+<section id="footer">
+  For hackers: The codebase to generate the PDF is Free. If you want to generate PDF locally on your own, check out 
+  <a href="https://github.com/bibstha/NepaliNewsPdfGenerator" target="_blank">NepaliNewsPdfGenerator</a>. <br/>
+  Get in touch with me in <a href="http://twitter.com/bibstha" target="_blank">Twitter</a>.
+</section>
 {% endblock %}
