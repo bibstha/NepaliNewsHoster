@@ -11,7 +11,7 @@ ___.   .__                  __   .__                   /\                 /\
 <head>
   <link rel="stylesheet" href="style.css" />
   <title>Bharkhar.com | {% block title %}{% endblock %}</title>
-  <link href="{{ MEDIA_URL }}css/bootstrap.min.css"  rel="stylesheet" type="text/css">
+  <link href="{{ MEDIA_URL }}css/bootstrap.css"  rel="stylesheet" type="text/css">
   <link href="{{ MEDIA_URL }}css/style.css"  rel="stylesheet" type="text/css">
 
   <!-- GoogleAnalytics -->
@@ -30,24 +30,31 @@ ___.   .__                  __   .__                   /\                 /\
 
 </head>
 <body>
-  <div class="container">
-    <div class="page-header">
+  <header>
+    <div class="container">
+      <a href="/">
+        <img src="{{ MEDIA_URL }}img/logo.png" alt="logo"/>
+      </a>
+    </div>
+  </header>
+  <div id="main" role="main">
+    <div class="container">
       <h1 id="title">{% block page_header %}{% endblock %}</h1>
-    </div>
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
-    <div id="sidebar">
-        {% block sidebar %}
-        {% comment %}
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/blog/">Blog</a></li>
-        </ul>
-        {% endcomment %}
-        {% endblock %}
-    </div>
-  </div> <!-- end of div.container -->
+      <div id="content">
+          {% block content %}{% endblock %}
+      </div>
+      <div id="sidebar">
+          {% block sidebar %}
+          {% comment %}
+          <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/blog/">Blog</a></li>
+          </ul>
+          {% endcomment %}
+          {% endblock %}
+      </div>
+    </div> <!-- end of div.container -->
+  </div>
 
   <!-- Le javascript
   ================================================== -->      

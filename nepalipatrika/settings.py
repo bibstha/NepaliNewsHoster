@@ -1,7 +1,7 @@
 import os
 # Django settings for nepalipatrika project.
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 # MAIN ROOT OF THE APPLICATION
