@@ -1,2 +1,3 @@
 *pyc
 osmusertracker/userdata/changesets/*.xml
+osmusertracker/userdata/*

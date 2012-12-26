@@ -21,18 +21,25 @@ Available Variables
     <h3>Papers for {{ fileDate }}</h3>
       <div class="row">
       {% for dir, latestFile in latestFileList.iteritems %}
-        <div class="span3">
+        <div class="span2">
           <a href="{% static '' %}{{ dir }}/{{ latestFile.0 }}" target="_blank">
-            <img src="{% static '' %}{{ dir }}/{{ latestFile.0|thumbnail_url }}" />
+            <img src="{% static '' %}thumbnails/{{ dir }}/{{ latestFile.0|thumbnail_url }}" />
           </a>
         </div>
       {% endfor %}
     </div>  
   {% endfor %}
 </section>
+<section id="all-papers" class="show-grid">
+  <p>
+  Click <a href="/patrika">here</a> to read past papers.
+  </p>
+</section>
 <section id="footer">
-  For hackers: The codebase to generate the PDF is Free. If you want to generate PDF locally on your own, check out 
+  <h3>About</h3>
+  <p>For hackers: The codebase to generate the PDF is Free. If you want to generate PDF locally on your own, check out 
   <a href="https://github.com/bibstha/NepaliNewsPdfGenerator" target="_blank">NepaliNewsPdfGenerator</a>. <br/>
   Get in touch with me in <a href="http://twitter.com/bibstha" target="_blank">Twitter</a>.
+  </p>
 </section>
 {% endblock %}

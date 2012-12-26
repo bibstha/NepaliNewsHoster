@@ -9,8 +9,8 @@ from django.conf import settings
 # admin.autodiscover()
 
 urlpatterns = patterns('', 
-    # (r'^patrika/static/(?P<path>.*pdf)$', 'django.views.static.serve', {'document_root': settings.STATICFILES_DIRS[0]}),
-    # (r'^patrika/static/thumbnails/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATICFILES_DIRS[1]}),
+    (r'^patrika/static/thumbnails/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATICFILES_DIRS[1]}),
+    (r'^patrika/static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATICFILES_DIRS[0]}),
     (r'^patrika/media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT})
 )
 urlpatterns += patterns('',
