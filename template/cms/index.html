@@ -19,14 +19,14 @@ Available Variables
 <section id="todays-papers">
   {% for fileDate, latestFileList in dateFileMap.iteritems %}
     <h3>Papers for {{ fileDate }}</h3>
-      <div class="row">
-      {% for dir, latestFile in latestFileList.iteritems %}
-        <div class="span2">
-          <a href="{% static '' %}{{ dir }}/{{ latestFile.0 }}" target="_blank">
-            <img src="{% static '' %}thumbnails/{{ dir }}/{{ latestFile.0|thumbnail_url }}" />
-          </a>
-        </div>
-      {% endfor %}
+    <div class="row">
+    {% for dir, latestFile in latestFileList.iteritems %}
+      <div class="span2">
+        <a href="{% static '' %}{{ dir }}/{{ latestFile.0 }}" target="_blank">
+          <img src="{% static '' %}thumbnails/{{ dir }}/{{ latestFile.0|thumbnail_url }}" />
+        </a>
+      </div>
+    {% endfor %}
     </div>  
   {% endfor %}
 </section>
