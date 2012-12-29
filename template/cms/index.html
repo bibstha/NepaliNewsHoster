@@ -22,9 +22,14 @@ Available Variables
     <div class="row">
     {% for dir, latestFile in latestFileList.iteritems %}
       <div class="span2">
-        <a href="{% static '' %}{{ dir }}/{{ latestFile.0 }}" target="_blank">
-          <img src="{% static '' %}thumbnails/{{ dir }}/{{ latestFile.0|thumbnail_url }}" />
-        </a>
+        <div>
+          <a href="{% static '' %}{{ dir }}/{{ latestFile.0 }}" target="_blank">
+            <img src="{% static '' %}thumbnails/{{ dir }}/{{ latestFile.0|thumbnail_url }}" />
+          </a>
+        </div>
+        <div>
+          {{ latestFile.1 }}
+        </div>
       </div>
     {% endfor %}
     </div>  
